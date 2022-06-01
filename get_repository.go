@@ -9,7 +9,7 @@ import (
 	"strconv"
 )
 
-func GetRepository(token string, organization string, repository string) (*Repository, bool, error) {
+func GetRepository(userID, token string, organization string, repository string) (*Repository, bool, error) {
 	b, err := json.Marshal(repository)
 	if err != nil {
 		panic(err)
@@ -23,7 +23,7 @@ func GetRepository(token string, organization string, repository string) (*Repos
 	if err != nil {
 		panic(err)
 	}
-	addHeaders(r, token)
+	addHeaders(r, userID, token)
 
 	resp, err := http.DefaultClient.Do(r)
 	if err != nil {
